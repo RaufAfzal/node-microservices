@@ -1,0 +1,74 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: raufafzal123
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: user-service
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: user-service
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+
+functions:
+  signup:
+    handler: src/handler.signUp
+    events:
+      - httpApi:
+          path: /signUp
+          method: post
+
+  signin:
+    handler: src/handler.signIn
+    events:
+      - httpApi:
+          path: /login
+          method: post
+
+  verify:
+    handler: src/handler.verify
+    events:
+      - httpApi:
+          path: /verify
+          method: post
+
+  profile:
+    handler: src/handler.profile
+    events:
+      - httpApi:
+          path: /user
+          method: post
+      - httpApi:
+          path: /user
+          method: put
+      - httpApi:
+          path: /user
+          method: get
+
+  cart:
+    handler: src/handler.cart
+    events:
+      - httpApi:
+          path: /cart
+          method: post
+      - httpApi:
+          path: /cart
+          method: put
+      - httpApi:
+          path: /cart
+          method: get 
+
+  payment:
+    handler: src/handler.payment
+    events:
+      - httpApi:
+          path: /payment
+          method: post
+      - httpApi:
+          path: /payment
+          method: put
+      - httpApi:
+          path: /payment
+          method: get
+
+plugins:
+  - serverless-offline
